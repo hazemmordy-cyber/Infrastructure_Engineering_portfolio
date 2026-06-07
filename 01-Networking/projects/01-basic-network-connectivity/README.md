@@ -1,122 +1,50 @@
-# Project 01 - Basic Network Connectivity
+# Basic Network Connectivity Lab
 
-## Project Overview
-
-This project demonstrates basic network communication between endpoints in a controlled lab environment.
-
-The objective is to validate IP connectivity, observe packet flow, and document the communication process using packet analysis tools.
-
----
-
-## Environment
-
-### Devices
-
-* PC-01
-* PC-02
-* Switch
-
-### Platform
-
-* Cisco Packet Tracer
-
-### Supporting Tools
-
-* Wireshark
-
----
-
-## Network Information
-
-| Device | IP Address   |
-| ------ | ------------ |
-| PC-01  | 192.168.1.10 |
-| PC-02  | 192.168.1.20 |
-
-Subnet Mask:
-
-```text
-255.255.255.0
-```
-
----
+## Objective
+Simulate a basic enterprise network scenario where two end devices communicate through a single switch, understanding Layer 2 forwarding and ARP resolution.
 
 ## Topology
+- **Device 1:** VPCS-1 (192.168.1.10/24)
+- **Device 2:** VPCS-2 (192.168.1.20/24)
+- **Switch:** Ethernet switch (unmanaged, default configuration)
 
-Topology diagram available in:
+![Topology](./topology/topology.png)
 
-```text
-topology/
-```
+## Tools Used
+- GNS3 (with GNS3 VM)
+- VPCS (Virtual PC Simulator)
+- Wireshark
 
----
+## Steps Performed
+1. Created a new GNS3 project named `01-basic-network-connectivity`.
+2. Added one Ethernet switch and two VPCS nodes.
+3. Connected VPCS-1 and VPCS-2 to the switch using Ethernet links.
+4. Started all devices.
+5. Configured static IP addresses:
+   - VPCS-1: `ip 192.168.1.10 255.255.255.0`
+   - VPCS-2: `ip 192.168.1.20 255.255.255.0`
+6. Tested connectivity with `ping 192.168.1.20` from VPCS-1.
+7. Captured traffic on the link between VPCS-1 and the switch using Wireshark.
 
-## Validation Tests
+## Observations
+- The first ping triggered an ARP Request from VPCS-1 to resolve the MAC address of 192.168.1.20.
+- After ARP Reply, ICMP Echo Request and Reply packets were exchanged.
+- All pings were successful with 0% loss.
 
-### Connectivity Test
-
-Ping executed between endpoints.
-
-Expected Result:
-
-```text
-Successful ICMP communication
-```
-
----
-
-## Packet Analysis
-
-Traffic captured and reviewed using Wireshark.
-
-Observed protocols:
-
-* ARP
-* ICMP
-
-Packet analysis evidence available in:
-
-```text
-packet-analysis/
-```
-
----
+## Key Learnings
+- How to configure static IP addresses on VPCS in GNS3.
+- Understanding the role of ARP in discovering MAC addresses within the same subnet.
+- Difference between ARP (Layer 2) and ICMP (Layer 3).
+- A basic switch forwards frames based on MAC addresses without any configuration.
 
 ## Evidence
+| Type | Location |
+|------|-----------|
+| Topology screenshot | `topology/topology.png` |
+| Ping result | `screenshots/ping-result.png` |
+| Wireshark capture (ARP + ICMP) | `packet-analysis/arp-icmp.pcapng` |
+| Wireshark screenshot | `screenshots/wireshark-capture.png` |
+| Commands log | `evidence/commands.txt` |
 
-Screenshots and validation artifacts available in:
-
-```text
-screenshots/
-evidence/
-```
-
----
-
-## Results
-
-* Endpoints successfully communicated.
-* ARP resolution completed successfully.
-* ICMP traffic observed and validated.
-* Basic network connectivity confirmed.
-
----
-
-## Skills Demonstrated
-
-* IP Addressing
-* Layer 2 Communication
-* Layer 3 Communication
-* Connectivity Validation
-* Packet Analysis
-* Technical Documentation
-
----
-
-## Future Improvements
-
-* VLAN Segmentation
-* Inter-VLAN Routing
-* DHCP Integration
-* DNS Integration
-
+## Next Steps
+Proceed to project `02-network-segmentation-with-vlans` to introduce VLANs and isolate traffic.

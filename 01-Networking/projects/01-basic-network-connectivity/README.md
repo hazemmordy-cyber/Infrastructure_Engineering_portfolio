@@ -8,7 +8,7 @@ Simulate a basic enterprise network scenario where two end devices communicate t
 - **Device 2:** VPCS-2 (192.168.1.20/24)
 - **Switch:** Ethernet switch (unmanaged, default configuration)
 
-![Topology](./topology/topology.png)
+![Topology](https://github.com/hazemmordy-cyber/Infrastructure_Engineering_portfolio/tree/519052635afd3b2edf3f2a79dc46a92b09a84936/01-Networking/projects/01-basic-network-connectivity/Topology)
 
 ## Tools Used
 - GNS3 (with GNS3 VM)
